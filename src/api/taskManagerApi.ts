@@ -6,5 +6,9 @@ const devtryBlogApi = {
         const url = '/login';
         return axiosClient.post(url, params);
     },
+    getInforUser: async (id: Number) => {
+        const url = `/users/${id}`;
+        return axiosClient.get(url);
+    },
 };
 export default devtryBlogApi;

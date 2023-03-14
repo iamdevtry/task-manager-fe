@@ -7,6 +7,7 @@ import { Task } from '../interfaces';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { modalActions } from '../store/Modal.store';
 import { tasksActions } from '../store/Tasks.store';
+import { Outlet } from 'react-router-dom';
 
 const HomePage = () => {
     const modal = useAppSelector((state) => state.modal);
