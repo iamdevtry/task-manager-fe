@@ -51,7 +51,6 @@ const AccountData: React.FC = () => {
         if (token) {
             let decoded: TokenDecoded;
             decoded = jwt_decode(JSON.parse(token).token);
-            console.log(decoded);
             getUser(decoded.payload.user_id);
         }
     }, [token]);

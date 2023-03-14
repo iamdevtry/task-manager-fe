@@ -16,6 +16,18 @@ export interface User {
     email: string;
 }
 
+export interface TaskDirectory {
+    id: number;
+    title: string;
+    description: string;
+    content: string;
+    created_at: string;
+    planned_start_date: string;
+    planned_end_date: string;
+    hours: number;
+    status: number;
+}
+
 export interface TokenDecoded {
     payload: {
         user_id: string;

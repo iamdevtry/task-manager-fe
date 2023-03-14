@@ -10,5 +10,12 @@ const devtryBlogApi = {
         const url = `/users/${id}`;
         return axiosClient.get(url);
     },
+    getListTask: async () => {
+        const url = '/tasks';
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.get(url, config);
+    },
 };
 export default devtryBlogApi;
