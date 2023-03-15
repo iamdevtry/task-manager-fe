@@ -3,8 +3,8 @@ import { useAppDispatch } from '../../../store/hooks';
 import { tasksActions } from '../../../store/Tasks.store';
 import ModalCreateTask from '../../Utilities/ModalTask';
 import { ReactComponent as OptionsSvg } from '../../../assets/options.svg';
-import { Activity, Task } from '../../../interfaces';
-import { ActivityCreate } from '../../../model/model';
+import { Task } from '../../../interfaces';
+import { Activity, ActivityCreate } from '../../../model/model';
 
 const BtnEditTask: React.FC<{ task: Task }> = ({ task }) => {
     const [modalEditTaskOpen, setModalEditTaskOpen] = useState<boolean>(false);

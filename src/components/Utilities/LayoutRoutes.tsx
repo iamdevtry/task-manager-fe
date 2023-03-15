@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Activity } from '../../interfaces';
+import { Activity } from '../../model/model';
 import { useAppDispatch } from '../../store/hooks';
 import { modalActions } from '../../store/Modal.store';
 import useSortTasks from '../hooks/useSortTasks';

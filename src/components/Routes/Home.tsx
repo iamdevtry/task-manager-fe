@@ -4,7 +4,8 @@ import { useAppSelector } from '../../store/hooks';
 import useDescriptionTitle from '../hooks/useDescriptionTitle';
 
 import taskManagerApi from '../../api/taskManagerApi';
-import { Activity } from '../../interfaces';
+
+import { Activity } from '../../model/model';
 
 const Home = () => {
     // const tasks = useAppSelector((state) => state.tasks.tasks);

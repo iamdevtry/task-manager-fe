@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity } from '../../../interfaces';
+import { Activity } from '../../../model/model';
 import { ReactComponent as Calendar } from '../../../assets/date.svg';
 import useDate from '../../hooks/useDate';
 

@@ -1,9 +1,9 @@
 import { Action, createSlice, Dispatch, MiddlewareAPI, PayloadAction } from '@reduxjs/toolkit';
-import { Activity, Task, TaskDirectory } from '../interfaces';
+import { Task, TaskDirectory } from '../interfaces';
 
 import taskManagerApi from '../api/taskManagerApi';
 import AuthService from '../services/auth/authServices';
-import { ActivityCreate } from '../model/model';
+import { Activity, ActivityCreate } from '../model/model';
 
 const defaultTasks: Task[] = [
     {

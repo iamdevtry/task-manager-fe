@@ -1,9 +1,11 @@
 import React from 'react';
-import { Activity } from '../../../interfaces';
+
 import BtnEditTask from './BtnEditTask';
 import BtnMarkAsImportant from './BtnMarkAsImportant';
 import BtnDeleteTask from './BtnDeleteTask';
 import BtnToggleCompleted from './BtnToggleCompleted';
+
+import { Activity } from '../../../model/model';
 
 const ActionsTaskItem: React.FC<{ activity: Activity; isListInView1: boolean }> = ({
     activity,

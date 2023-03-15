@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import InfosTask from './InfosTask';
 import ActionsTaskItem from './ActionsTaskItem';
 
-import { Activity } from '../../../interfaces';
+import { Activity } from '../../../model/model';
 
 const TaskItem: React.FC<{ isListInView1: boolean; activity: Activity }> = ({
     isListInView1,

@@ -7,4 +7,28 @@ export interface ActivityCreate {
     planned_start_date: string | null;
     planned_end_date: string | null;
     content: string | null;
+    tag: Tag;
+}
+
+export interface Activity {
+    id: number;
+    task_id: number;
+    title: string;
+    description: string;
+    status: number;
+    hours: number;
+    created_at: string;
+    updated_at: string | null;
+    planned_start_date: string | null;
+    planned_end_date: string | null;
+    actual_start_date: string | null;
+    actual_end_date: string | null;
+    content: string | null;
+    tag: Tag;
+}
+
+export interface Tag {
+    id: number;
+    name: string;
+    slug: string;
 }
