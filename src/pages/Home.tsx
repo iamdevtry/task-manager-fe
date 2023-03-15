@@ -3,11 +3,10 @@ import Footer from '../components/Footer';
 import Menu from '../components/Menu/Menu';
 import TasksSection from '../components/TasksSection/TasksSection';
 import ModalCreateTask from '../components/Utilities/ModalTask';
-import { Task } from '../interfaces';
+import { ActivityCreate } from '../model/model';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { modalActions } from '../store/Modal.store';
 import { tasksActions } from '../store/Tasks.store';
-import { Outlet } from 'react-router-dom';
 
 const HomePage = () => {
     const modal = useAppSelector((state) => state.modal);
@@ -18,8 +17,8 @@ const HomePage = () => {
         dispatch(modalActions.closeModalCreateTask());
     };
 
-    const createNewTaskHandler = (task: Task) => {
-        dispatch(tasksActions.addNewTask(task));
+    const createNewActivityHandler = (newActivity: ActivityCreate) => {
+        dispatch(tasksActions.addNewTask(newActivity));
     };
 
     return (
@@ -28,7 +27,7 @@ const HomePage = () => {
                 <ModalCreateTask
                     onClose={closeModalCreateTask}
                     nameForm="Add a task"
-                    onConfirm={createNewTaskHandler}
+                    onConfirm={createNewActivityHandler}
                 />
             )}
             <Menu />

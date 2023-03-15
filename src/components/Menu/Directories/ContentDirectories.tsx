@@ -25,7 +25,6 @@ const ContentDirectories: React.FC<{ classActive: string }> = ({ classActive }) 
         setModalDirIsShown(false);
     };
 
-    console.log(directories);
     return (
         <>
             {modalDirIsShown && (

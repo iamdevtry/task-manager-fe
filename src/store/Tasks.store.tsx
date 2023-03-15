@@ -1,8 +1,9 @@
 import { Action, createSlice, Dispatch, MiddlewareAPI, PayloadAction } from '@reduxjs/toolkit';
-import { Task, TaskDirectory } from '../interfaces';
+import { Activity, Task, TaskDirectory } from '../interfaces';
 
 import taskManagerApi from '../api/taskManagerApi';
 import AuthService from '../services/auth/authServices';
+import { ActivityCreate } from '../model/model';
 
 const defaultTasks: Task[] = [
     {
@@ -223,8 +224,9 @@ const tasksSlice = createSlice({
     name: 'tasks',
     initialState: initialState,
     reducers: {
-        addNewTask(state, action: PayloadAction<Task>) {
-            state.tasks = [action.payload, ...state.tasks];
+        addNewTask(state, action: PayloadAction<ActivityCreate>) {
+            // state.tasks = [action.payload, ...state.tasks];
+            console.log(action.payload);
         },
         removeTask(state, action) {
             const newTasksList = state.tasks.filter((task) => task.id !== action.payload);
@@ -234,12 +236,11 @@ const tasksSlice = createSlice({
             const newTaskFavorited = state.tasks.find((task) => task.id === action.payload);
             newTaskFavorited!.important = !newTaskFavorited!.important;
         },
-        editTask(state, action: PayloadAction<Task>) {
-            const taskId = action.payload.id;
-
-            const newTaskEdited: Task = state.tasks.find((task: Task) => task.id === taskId)!;
-            const indexTask = state.tasks.indexOf(newTaskEdited);
-            state.tasks[indexTask] = action.payload;
+        editTask(state, action: PayloadAction<ActivityCreate | Activity>) {
+            // const taskId = action.payload.id;
+            // const newTaskEdited: Task = state.tasks.find((task: Task) => task.id === taskId)!;
+            // const indexTask = state.tasks.indexOf(newTaskEdited);
+            // state.tasks[indexTask] = action.payload;
         },
         toggleTaskCompleted(state, action: PayloadAction<string>) {
             const taskId = action.payload;
