@@ -1,26 +1,28 @@
-import { useEffect, useState } from "react";
-import { Task } from "../../interfaces";
+import { useEffect, useState } from 'react';
+import { Task } from '../../interfaces';
+
+import { Activity } from '../../model/model';
 
 interface Props {
-  tasks: Task[];
-  done: boolean;
+    activities: Activity[];
+    done: boolean;
 }
 
-const useCompletedTasks = (props: Props): { tasks: Task[] } => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+const useCompletedTasks = (props: Props): { activities: Activity[] } => {
+    const [activities, setTasks] = useState<Activity[]>([]);
 
-  useEffect(() => {
-    const filteredTasks: Task[] = props.tasks.filter((task: Task) => {
-      if (props.done) {
-        return task.completed;
-      } else {
-        return !task.completed;
-      }
-    });
-    setTasks(filteredTasks);
-  }, [props.tasks, props.done]);
+    useEffect(() => {
+        const filteredTasks: Activity[] = props.activities.filter((act: Activity) => {
+            if (props.done) {
+                return act.status;
+            } else {
+                return !act.status;
+            }
+        });
+        setTasks(filteredTasks);
+    }, [props.activities, props.done]);
 
-  return { tasks };
+    return { activities };
 };
 
 export default useCompletedTasks;

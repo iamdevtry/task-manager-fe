@@ -1,61 +1,25 @@
 import { Action, createSlice, Dispatch, MiddlewareAPI, PayloadAction } from '@reduxjs/toolkit';
-import { Task } from '../interfaces';
 
 import taskManagerApi from '../api/taskManagerApi';
 import { Activity, ActivityCreate, TaskDirectory } from '../model/model';
 
-const defaultTasks: Task[] = [
-    {
-        title: 'Task 1',
-        important: false,
-        description: 'This is the description for this task',
-        date: '2023-04-12',
-        dir: 'Main',
-        completed: true,
-        id: 't1',
-    },
-    {
-        title: 'Task 2',
-        important: true,
-        description: 'This is the description for this task',
-        date: '2023-05-15',
-        dir: 'Main',
-        completed: true,
-        id: 't2',
-    },
-    {
-        title: 'Task 3',
-        important: false,
-        description: 'This is the description for this task',
-        date: '2023-08-21',
-        dir: 'Main',
-        completed: false,
-        id: 't3',
-    },
-];
-
-// const getDirectories = (): TaskDirectory[] => {
-//     let taskDirectories: TaskDirectory[] = [];
-//     taskManagerApi.getListTask().then((res) => {
-//         taskDirectories = res.data;
-//     });
-
-//     return taskDirectories;
-// };
-const getDirectories = () => {
+const getInitValue = () => {
     taskManagerApi.getListTask().then((res) => {
         localStorage.setItem('taskDirectories', JSON.stringify(res.data));
     });
+    taskManagerApi.getListActivity().then((res) => {
+        localStorage.setItem('activity', JSON.stringify(res.data));
+    });
 };
-getDirectories();
+getInitValue();
 
 const initialState: {
-    tasks: Task[];
+    activities: Activity[];
     directories: TaskDirectory[];
 } = {
-    tasks: localStorage.getItem('tasks')
-        ? JSON.parse(localStorage.getItem('tasks')!)
-        : defaultTasks,
+    activities: localStorage.getItem('activity')
+        ? JSON.parse(localStorage.getItem('activity')!)
+        : [],
     directories: localStorage.getItem('taskDirectories')
         ? JSON.parse(localStorage.getItem('taskDirectories')!)
         : [],
@@ -70,29 +34,30 @@ const tasksSlice = createSlice({
             console.log(action.payload);
         },
         removeTask(state, action) {
-            const newTasksList = state.tasks.filter((task) => task.id !== action.payload);
-            state.tasks = newTasksList;
+            // const newTasksList = state.activities.filter((act) => act.id !== action.payload);
+            // state.activities = newTasksList;
+            console.log(action);
         },
         markAsImportant(state, action: PayloadAction<string>) {
-            const newTaskFavorited = state.tasks.find((task) => task.id === action.payload);
-            newTaskFavorited!.important = !newTaskFavorited!.important;
+            // const newTaskFavorited = state.activities.find((act) => act.id === action.payload);
+            // newTaskFavorited!.important = !newTaskFavorited!.important;
         },
         editTask(state, action: PayloadAction<ActivityCreate | Activity>) {
             // const taskId = action.payload.id;
             // const newTaskEdited: Task = state.tasks.find((task: Task) => task.id === taskId)!;
             // const indexTask = state.tasks.indexOf(newTaskEdited);
             // state.tasks[indexTask] = action.payload;
+            console.log(action.payload);
         },
         toggleTaskCompleted(state, action: PayloadAction<string>) {
             const taskId = action.payload;
-
-            const currTask = state.tasks.find((task) => task.id === taskId)!;
-
-            currTask.completed = !currTask.completed;
+            const currTask = state.activities.find((act) => act.id + '' === taskId)!;
+            console.log(state.activities);
+            console.log(currTask);
         },
         deleteAllData(state) {
-            state.tasks = [];
-            // state.directories = ['Main'];
+            state.activities = [];
+            state.directories = [];
         },
         createDirectory(state, action: PayloadAction<string>) {
             const newDirectory: string = action.payload;
@@ -101,10 +66,9 @@ const tasksSlice = createSlice({
             // state.directories = [newDirectory, ...state.directories];
         },
         deleteDirectory(state, action: PayloadAction<string>) {
-            const dirName = action.payload;
-
+            // const dirName = action.payload;
             // state.directories = state.directories.filter((dir) => dir !== dirName);
-            state.tasks = state.tasks.filter((task) => task.dir !== dirName);
+            // state.tasks = state.tasks.filter((task) => task.dir !== dirName);
         },
         editDirectoryName(
             state,
@@ -118,9 +82,9 @@ const tasksSlice = createSlice({
             // const dirIndex = state.directories.indexOf(previousDirName);
 
             // state.directories[dirIndex] = newDirName;
-            state.tasks.forEach((task) => {
-                if (task.dir === previousDirName) {
-                    task.dir = newDirName;
+            state.activities.forEach((act) => {
+                if (act.title === previousDirName) {
+                    act.title = newDirName;
                 }
             });
         },
@@ -152,11 +116,11 @@ export const tasksMiddleware = (store: MiddlewareAPI) => (next: Dispatch) => (ac
     }
 
     if (tasksActions.removeTask.match(action)) {
-        console.log(JSON.parse(localStorage.getItem('tasks')!));
-        if (localStorage.getItem('tasks')) {
-            const localStorageTasks = JSON.parse(localStorage.getItem('tasks')!);
+        console.log(JSON.parse(localStorage.getItem('activity')!));
+        if (localStorage.getItem('activity')) {
+            const localStorageTasks = JSON.parse(localStorage.getItem('activity')!);
             if (localStorageTasks.length === 0) {
-                localStorage.removeItem('tasks');
+                localStorage.removeItem('activity');
             }
         }
     }

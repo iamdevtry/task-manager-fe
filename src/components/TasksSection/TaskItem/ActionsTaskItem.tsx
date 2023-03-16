@@ -19,13 +19,13 @@ const ActionsTaskItem: React.FC<{ activity: Activity; isListInView1: boolean }> 
                 }`}
             >
                 <BtnToggleCompleted
-                    taskCompleted={true}
+                    taskCompleted={activity.status === 1 ? 1 : 0}
                     activityId={activity.id + ''}
                     isListInView1={isListInView1}
                 />
-                {/* <BtnMarkAsImportant taskId={activity.id} taskImportant={activity.important} />
-                <BtnDeleteTask taskId={activity.id} />
-                <BtnEditTask task={activity} /> */}
+                {/* <BtnMarkAsImportant taskId={activity.id} taskImportant={activity.important} /> */}
+                <BtnDeleteTask taskId={activity.id + ''} />
+                <BtnEditTask activity={activity} />
             </div>
         </>
     );

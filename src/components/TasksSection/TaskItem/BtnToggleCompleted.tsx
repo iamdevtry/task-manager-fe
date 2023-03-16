@@ -5,7 +5,7 @@ import { ReactComponent as SvgX } from '../../../assets/x.svg';
 import { ReactComponent as Check } from '../../../assets/check.svg';
 
 const BtnToggleCompleted: React.FC<{
-    taskCompleted: boolean;
+    taskCompleted: number;
     activityId: string;
     isListInView1: boolean;
 }> = ({ taskCompleted, activityId, isListInView1 }) => {

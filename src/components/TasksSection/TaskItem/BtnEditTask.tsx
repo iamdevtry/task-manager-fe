@@ -6,7 +6,7 @@ import { ReactComponent as OptionsSvg } from '../../../assets/options.svg';
 import { Task } from '../../../interfaces';
 import { Activity, ActivityCreate } from '../../../model/model';
 
-const BtnEditTask: React.FC<{ task: Task }> = ({ task }) => {
+const BtnEditTask: React.FC<{ activity: Activity }> = ({ activity }) => {
     const [modalEditTaskOpen, setModalEditTaskOpen] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
@@ -34,7 +34,7 @@ const BtnEditTask: React.FC<{ task: Task }> = ({ task }) => {
             {modalEditTaskOpen && (
                 <ModalCreateTask
                     onClose={closeModalEditTask}
-                    // activity={activity}
+                    activity={activity}
                     nameForm="Edit task"
                     onConfirm={editTaskHandler}
                 />

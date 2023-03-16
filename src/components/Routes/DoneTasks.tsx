@@ -4,23 +4,14 @@ import useCompletedTasks from '../hooks/useCompletedTasks';
 import useDescriptionTitle from '../hooks/useDescriptionTitle';
 import LayoutRoutes from '../Utilities/LayoutRoutes';
 
-// const DoneTasks: React.FC<{ done: boolean; title: string }> = ({
-//   done,
-//   title,
-// }) => {
-//   const tasks = useAppSelector((state) => state.tasks.tasks);
+const DoneTasks: React.FC<{ done: boolean; title: string }> = ({ done, title }) => {
+    const activities = useAppSelector((state) => state.tasks.activities);
 
-//   const { tasks: tasksFiltered } = useCompletedTasks({ tasks, done });
+    const { activities: tasksFiltered } = useCompletedTasks({ activities, done });
 
-//   useDescriptionTitle("All tasks done", title);
+    useDescriptionTitle('All tasks done', title);
 
-//   return <LayoutRoutes title={title} tasks={tasksFiltered}></LayoutRoutes>;
-// };
-
-// export default DoneTasks;
-
-const DoneTasks = () => {
-    return <h1>DoneTasks</h1>;
+    return <LayoutRoutes title={title} activities={tasksFiltered}></LayoutRoutes>;
 };
 
 export default DoneTasks;
