@@ -4,7 +4,8 @@ import { tasksActions } from '../../../store/Tasks.store';
 import ModalDirectory from '../../Utilities/ModalDirectory';
 import ItemDirectory from './ItemDirectory';
 
-import { TaskDirectory } from '../../../interfaces';
+import { TaskDirectory } from '../../../model/model';
+
 const ContentDirectories: React.FC<{ classActive: string }> = ({ classActive }) => {
     const directories: TaskDirectory[] = useAppSelector((store) => store.tasks.directories);
 
@@ -24,7 +25,6 @@ const ContentDirectories: React.FC<{ classActive: string }> = ({ classActive }) 
     const closeModalDirectoryHandler = () => {
         setModalDirIsShown(false);
     };
-
     return (
         <>
             {modalDirIsShown && (

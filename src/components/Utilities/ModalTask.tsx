@@ -167,7 +167,7 @@ const ModalCreateTask: React.FC<{
             planned_start_date: getCustomTime(startDate, startTime),
             planned_end_date: getCustomTime(endDate, endTime),
             hours: 0,
-            status: 0,
+            status: isCompleted ? 1 : 0,
             tag: tag!,
             // completed: isCompleted,
             // important: isImportant,

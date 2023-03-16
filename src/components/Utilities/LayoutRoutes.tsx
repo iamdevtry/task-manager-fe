@@ -12,7 +12,6 @@ type Props = {
 };
 
 const LayoutRoutes: React.FC<Props> = ({ title, activities }) => {
-    console.log(activities);
     const [isListInView1, setIsListInView1] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
