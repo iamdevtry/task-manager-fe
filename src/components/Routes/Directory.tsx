@@ -4,7 +4,7 @@ import { useAppSelector } from '../../store/hooks';
 import useDescriptionTitle from '../hooks/useDescriptionTitle';
 import LayoutRoutes from '../Utilities/LayoutRoutes';
 
-import { Activity } from '../../model/model';
+import { Activity, TaskDirectory } from '../../model/model';
 const Directory: React.FC = () => {
     const activities = useAppSelector((state) => state.tasks.activities);
     const directories = useAppSelector((state) => state.tasks.directories);
@@ -14,6 +14,7 @@ const Directory: React.FC = () => {
     useDescriptionTitle(`Tasks in "${params.dir}"`, params.dir ? params.dir + ' directory' : '');
 
     const [tasksInCurrentDirectory, setTasksInCurrentDirectory] = useState<Activity[]>([]);
+    const [currentTaskDirectory, setCurrentTaskDirectory] = useState<TaskDirectory>();
 
     useEffect(() => {
         // const dirExists = directories.includes(params.dir!);
@@ -26,10 +27,17 @@ const Directory: React.FC = () => {
         );
 
         setTasksInCurrentDirectory(activitiesFiltered);
-        console.log(activitiesFiltered);
+
+        const currentDir = directories.find((dir: TaskDirectory) => dir.id === Number(params.dir));
+        setCurrentTaskDirectory(currentDir);
     }, [directories, navigate, params.dir, activities]);
 
-    return <LayoutRoutes title={`${params.dir}'s tasks`} activities={tasksInCurrentDirectory} />;
+    return (
+        <LayoutRoutes
+            title={`${currentTaskDirectory?.title}'s tasks`}
+            activities={tasksInCurrentDirectory}
+        />
+    );
 };
 
 export default Directory;
