@@ -38,7 +38,7 @@ const ContentDirectories: React.FC<{ classActive: string }> = ({ classActive }) 
 
             <ul className="max-h-36 overflow-auto">
                 {directories.map((dir) => (
-                    <ItemDirectory key={dir.id} classActive={classActive} dir={dir.title} />
+                    <ItemDirectory key={dir.id} classActive={classActive} dir={dir} />
                 ))}
             </ul>
             <button

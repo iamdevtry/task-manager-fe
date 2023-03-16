@@ -7,7 +7,12 @@ import { ReactComponent as Edit } from '../../../assets/edit.svg';
 import ModalConfirm from '../../Utilities/ModalConfirm';
 import ModalDirectory from '../../Utilities/ModalDirectory';
 
-const ItemDirectory: React.FC<{ dir: string; classActive: string }> = ({ dir, classActive }) => {
+import { TaskDirectory } from '../../../model/model';
+
+const ItemDirectory: React.FC<{ dir: TaskDirectory; classActive: string }> = ({
+    dir,
+    classActive,
+}) => {
     const route = useLocation();
     const currentPath = route.pathname;
 
@@ -21,16 +26,16 @@ const ItemDirectory: React.FC<{ dir: string; classActive: string }> = ({ dir, cl
     };
 
     const deleteDirectoryHandler = () => {
-        dispatch(tasksActions.deleteDirectory(dir));
+        dispatch(tasksActions.deleteDirectory(dir.title));
     };
 
     const confirmEditDirNameHandler = (dirName: string) => {
-        dispatch(
-            tasksActions.editDirectoryName({
-                previousDirName: dir,
-                newDirName: dirName,
-            })
-        );
+        // dispatch(
+        //     tasksActions.editDirectoryName({
+        //         previousDirName: dir,
+        //         newDirName: dirName,
+        //     })
+        // );
     };
 
     return (
@@ -39,7 +44,7 @@ const ItemDirectory: React.FC<{ dir: string; classActive: string }> = ({ dir, cl
                 <ModalDirectory
                     onClose={closeModalDirectoryHandler}
                     onConfirm={confirmEditDirNameHandler}
-                    dirName={dir}
+                    dirName={dir.title}
                     title="Edit directory name"
                     btnText="Edit"
                 />
@@ -57,14 +62,14 @@ const ItemDirectory: React.FC<{ dir: string; classActive: string }> = ({ dir, cl
                 }`}
             >
                 <NavLink
-                    to={`/dir/${dir}`}
-                    title={dir}
+                    to={`/dir/${dir.id}`}
+                    title={dir.title}
                     className="hover:text-rose-600 dark:hover:text-slate-200 transition text-ellipsis whitespace-nowrap overflow-hidden max-w-[7rem]"
                 >
-                    {dir}
+                    {dir.title}
                 </NavLink>
 
-                {dir !== 'Main' && (
+                {dir.title !== 'Main' && (
                     <div className="ml-auto buttonsDir">
                         <button
                             title="edit directory name"
