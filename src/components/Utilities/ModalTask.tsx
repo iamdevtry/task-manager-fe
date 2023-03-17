@@ -1,41 +1,12 @@
 import React, { useRef, useState } from 'react';
-import { Task } from '../../interfaces';
 import { useAppSelector } from '../../store/hooks';
 import Modal from './Modal';
 
 import { ActivityCreate, TaskDirectory } from '../../model/model';
 import { getCustomTime } from '../../utils/CustomTime';
-import AutoComplete from '../Utilities/AutoComplete';
 
 import { useCustomDate, useCustomTime } from '../hooks/useDate';
 import { Activity, Tag } from '../../model/model';
-const items: Tag[] = [
-    {
-        id: 0,
-        name: 'Cobol',
-        slug: 'cobol',
-    },
-    {
-        id: 1,
-        name: 'JavaScript',
-        slug: 'javascript',
-    },
-    {
-        id: 2,
-        name: 'Basic',
-        slug: 'basic',
-    },
-    {
-        id: 3,
-        name: 'PHP',
-        slug: 'php',
-    },
-    {
-        id: 4,
-        name: 'Java',
-        slug: 'java',
-    },
-];
 
 const InputCheckbox: React.FC<{
     label: string;
@@ -174,7 +145,6 @@ const ModalCreateTask: React.FC<{
             planned_end_date: getCustomTime(endDate, endTime),
             hours: 0,
             status: isCompleted ? 1 : 0,
-            tag: tag!,
             // completed: isCompleted,
             // important: isImportant,
         };
@@ -183,7 +153,6 @@ const ModalCreateTask: React.FC<{
     };
 
     const handleTagSelected = (tag: Tag) => {
-        console.log(tag);
         setTag(tag);
     };
 
@@ -284,10 +253,6 @@ const ModalCreateTask: React.FC<{
                             </option>
                         ))}
                     </select>
-                </label>
-                <label>
-                    Tags
-                    <AutoComplete tags={items} onConfirm={handleTagSelected} />
                 </label>
                 <InputCheckbox
                     isChecked={isImportant}

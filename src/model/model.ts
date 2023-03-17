@@ -7,7 +7,6 @@ export interface ActivityCreate {
     planned_start_date: string | null;
     planned_end_date: string | null;
     content: string | null;
-    tag: Tag;
 }
 
 export interface Activity {
@@ -24,7 +23,6 @@ export interface Activity {
     actual_start_date: string | null;
     actual_end_date: string | null;
     content: string | null;
-    tag: Tag;
 }
 
 export interface TaskDirectory {
@@ -37,6 +35,7 @@ export interface TaskDirectory {
     planned_end_date: string;
     hours: number;
     status: number;
+    tag: Tag;
 }
 
 export interface Tag {
