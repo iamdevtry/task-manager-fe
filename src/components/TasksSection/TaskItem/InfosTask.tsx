@@ -7,8 +7,8 @@ const InfosTask: React.FC<{ activity: Activity; isListInView1: boolean }> = ({
     activity,
     isListInView1,
 }) => {
-    const startDateFormated = useCustomDate(activity?.planned_start_date!);
-    const endDateFormated = useCustomDate(activity?.planned_end_date!);
+    const startDateFormated = useCustomDate('dd/mm/yyyy hh:mm:ss', activity?.planned_start_date!);
+    const endDateFormated = useCustomDate('dd/mm/yyyy hh:mm:ss', activity?.planned_end_date!);
     return (
         <div className={`flex flex-col flex-1 ${isListInView1 ? 'mr-6' : ''}`}>
             <div className={`flex items-center justify-between ${isListInView1 ? 'mb-1' : 'mb-2'}`}>

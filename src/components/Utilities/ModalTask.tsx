@@ -3,10 +3,11 @@ import { Task } from '../../interfaces';
 import { useAppSelector } from '../../store/hooks';
 import Modal from './Modal';
 
-import { ActivityCreate } from '../../model/model';
+import { ActivityCreate, TaskDirectory } from '../../model/model';
 import { getCustomTime } from '../../utils/CustomTime';
 import AutoComplete from '../Utilities/AutoComplete';
 
+import { useCustomDate, useCustomTime } from '../hooks/useDate';
 import { Activity, Tag } from '../../model/model';
 const items: Tag[] = [
     {
@@ -101,13 +102,38 @@ const ModalCreateTask: React.FC<{
         return '';
     });
     //Start Date
-    const [startDate, setStartDate] = useState<string>('');
+    // const [startDate, setStartDate] = useState<string>('');
+    let sDate = useCustomDate('yyyy-mm-dd', activity?.planned_start_date!);
+    let eDate = useCustomDate('yyyy-mm-dd', activity?.planned_end_date!);
+    let sTime = useCustomTime(activity?.planned_start_date!);
+    let eTime = useCustomTime(activity?.planned_end_date!);
+    const [startDate, setStartDate] = useState<string>(() => {
+        if (sDate) {
+            return sDate;
+        }
+        return todayDate;
+    });
     //Start Time
-    const [startTime, setStartTime] = useState<string>('');
+    const [startTime, setStartTime] = useState<string>(() => {
+        if (sTime) {
+            return sTime;
+        }
+        return todayDate;
+    });
     //End Date
-    const [endDate, setEndDate] = useState<string>('');
+    const [endDate, setEndDate] = useState<string>(() => {
+        if (eDate) {
+            return eDate;
+        }
+        return todayDate;
+    });
     //End Time
-    const [endTime, setEndTime] = useState<string>('');
+    const [endTime, setEndTime] = useState<string>(() => {
+        if (eTime) {
+            return eTime;
+        }
+        return todayDate;
+    });
 
     //Tags
     const [tag, setTag] = useState<Tag>();
@@ -129,35 +155,15 @@ const ModalCreateTask: React.FC<{
         return false;
     });
 
-    // const [selectedDirectory, setSelectedDirectory] = useState<string>(() => {
-    //     if (task) {
-    //         return task.dir;
-    //     }
-    //     return directories[0];
-    // });
+    const [selectedDirectory, setSelectedDirectory] = useState<string>(() => {
+        if (activity) {
+            return activity.task_id.toString();
+        }
+        return directories[0].id.toString();
+    });
 
     const createNewActivityHandler = (event: React.FormEvent): void => {
         event.preventDefault();
-        // console.log('add new activity');
-        // isTitleValid.current = title.trim().length > 0;
-        // isDateValid.current = date.trim().length > 0;
-
-        // if (isTitleValid.current && isDateValid.current) {
-        //     const newActivity: ActivityCreate = {
-        //         task_id: 1,
-        //         title: title,
-        //         description: description,
-        //         content: content,
-        //         planned_start_date: handleDateTime(startDate, startTime),
-        //         planned_end_date: handleDateTime(endDate, endTime),
-        //         hours: 0,
-        //         status: 0,
-        //         // completed: isCompleted,
-        //         // important: isImportant,
-        //     };
-        //     onConfirm(newActivity);
-        //     onClose();
-        // }
 
         const newActivity: ActivityCreate = {
             task_id: 1,
@@ -265,18 +271,18 @@ const ModalCreateTask: React.FC<{
                     Select a directory
                     <select
                         className="block w-full"
-                        // value={selectedDirectory}
-                        // onChange={({ target }) => setSelectedDirectory(target.value)}
+                        value={selectedDirectory}
+                        onChange={({ target }) => setSelectedDirectory(target.value)}
                     >
-                        {/* {directories.map((dir: string) => (
-              <option
-                key={dir}
-                value={dir}
-                className="bg-slate-100 dark:bg-slate-800"
-              >
-                {dir}
-              </option>
-            ))} */}
+                        {directories.map((dir: TaskDirectory) => (
+                            <option
+                                key={dir.id}
+                                value={dir.id}
+                                className="bg-slate-100 dark:bg-slate-800"
+                            >
+                                {dir.title}
+                            </option>
+                        ))}
                     </select>
                 </label>
                 <label>
