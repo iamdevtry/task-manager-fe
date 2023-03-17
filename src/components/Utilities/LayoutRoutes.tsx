@@ -46,7 +46,7 @@ const LayoutRoutes: React.FC<Props> = ({ title, activities }) => {
                 {activities.map((act) => (
                     <TaskItem key={act.id} isListInView1={isListInView1} activity={act} />
                 ))}
-                <li>
+                <li style={{ height: '100%' }}>
                     <button
                         onClick={openModalHandler}
                         className={`border-2 border-slate-300
@@ -56,6 +56,7 @@ const LayoutRoutes: React.FC<Props> = ({ title, activities }) => {
                dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-300 ${
                    isListInView1 ? 'h-20 sm:h-32' : 'h-52 sm:h-64'
                }`}
+                        style={{ height: '100%' }}
                     >
                         Add new task
                     </button>
