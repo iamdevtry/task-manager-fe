@@ -12,7 +12,7 @@ const TaskItem: React.FC<{ isListInView1: boolean; activity: Activity }> = ({
 }) => {
     return (
         <>
-            <li key={activity.id}>
+            <li key={activity.id} style={{ height: '100%' }}>
                 {/* <Link
                     to={`/dir/${activity.task_id}`}
                     title={activity.title}
