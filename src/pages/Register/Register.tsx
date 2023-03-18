@@ -6,10 +6,6 @@ import AuthService from '../../services/auth/authServices';
 import { phone } from 'phone';
 import countryCodes from 'country-codes-list';
 
-interface CountryCode {
-    value: string;
-    name: string;
-}
 const countryCodesObject = countryCodes.customArray();
 
 const RegisterPage = () => {

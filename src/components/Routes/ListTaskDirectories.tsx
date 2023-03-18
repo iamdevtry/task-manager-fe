@@ -33,7 +33,7 @@ const ListTaskDirectories = () => {
                     title="Create new directory"
                 />
             )}
-            <ul className="flex">
+            <ul className="flex flex-wrap">
                 {directories.map((dir) => (
                     <ItemDirectoryDetail key={dir.id} dir={dir} />
                 ))}

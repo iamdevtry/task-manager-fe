@@ -5,34 +5,30 @@ import { useAppSelector } from '../../store/hooks';
 import useDescriptionTitle from '../hooks/useDescriptionTitle';
 import LayoutRoutes from '../Utilities/LayoutRoutes';
 
-// const TaskOnly: React.FC = () => {
-//   const params = useParams();
-//   const navigate = useNavigate();
+import { Activity } from '../../model/model';
 
-//   const tasks = useAppSelector((store) => store.tasks.tasks);
+const TaskOnly: React.FC = () => {
+    const params = useParams();
+    const navigate = useNavigate();
 
-//   const [matchedTask, setMatchedTask] = useState<Task[]>([]);
+    const tasks = useAppSelector((store) => store.tasks.activities);
 
-//   useEffect(() => {
-//     const taskId = params.taskId;
-//     const filteredTask = tasks.filter((task: Task) => taskId === task.id);
-//     if (!filteredTask.length) {
-//       navigate("/");
-//     }
-//     setMatchedTask(filteredTask);
-//   }, [navigate, params.taskId, tasks]);
+    const [matchedTask, setMatchedTask] = useState<Activity[]>([]);
 
-//   const title = matchedTask.length ? matchedTask[0].title : "";
+    useEffect(() => {
+        const taskId = params.taskId;
+        const filteredTask = tasks.filter((task: Activity) => taskId === task.id.toString());
+        if (!filteredTask.length) {
+            navigate('/');
+        }
+        setMatchedTask(filteredTask);
+    }, [navigate, params.taskId, tasks]);
 
-//   useDescriptionTitle(`Searching for ${title}`, "Task " + title);
+    const title = matchedTask.length ? matchedTask[0].title : '';
 
-//   return <LayoutRoutes title={title} tasks={matchedTask} />;
-// };
+    useDescriptionTitle(`Searching for ${title}`, 'Task ' + title);
 
-// export default TaskOnly;
-
-const TaskOnly = () => {
-    return <h1>TaskOnly</h1>;
+    return <LayoutRoutes title={title} activities={matchedTask} />;
 };
 
 export default TaskOnly;

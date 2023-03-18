@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createSearchParams, Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as Search } from '../../assets/search.svg';
-import useDate from '../hooks/useDate';
 import useSearchQuery from '../hooks/useSearchQuery';
 import useVisibility from '../hooks/useVisibility';
 
 import { Activity } from '../../model/model';
 
 const ItemSearch: React.FC<{ activity: Activity }> = ({ activity }) => {
-    const dateFormated = useDate(activity.created_at);
     return (
         <li key={activity.id} className="py-2">
             <Link
@@ -16,7 +14,6 @@ const ItemSearch: React.FC<{ activity: Activity }> = ({ activity }) => {
                 className="flex justify-between transition hover:text-rose-500 dark:hover:text-slate-200"
             >
                 <span>{activity.title}</span>
-                <span>{dateFormated}</span>
             </Link>
         </li>
     );

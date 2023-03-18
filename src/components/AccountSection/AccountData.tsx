@@ -72,12 +72,12 @@ const AccountData: React.FC = () => {
                 <DarkMode />
 
                 <TasksDone />
-                <DeleteTasks />
+                {/* <DeleteTasks /> */}
                 <a
                     href="https://github.com/iamdevtry"
-                    className="mt-4 bg-rose-100 p-2 rounded-md text-rose-600 text-center transition hover:bg-rose-200 dark:bg-slate-700/[.3] dark:text-slate-200"
+                    className="mt-auto bg-rose-100 p-2 rounded-md text-rose-600 text-center transition hover:bg-rose-200 dark:bg-slate-700/[.3] dark:text-slate-200"
                 >
-                    Projected by Binh Phong Tran
+                    Binh Phong Tran
                 </a>
             </section>
         </LayoutMenus>
