@@ -5,9 +5,11 @@ import { Activity, ActivityCreate, TaskDirectory } from '../model/model';
 
 const getInitValue = () => {
     taskManagerApi.getListTask().then((res) => {
+        localStorage.removeItem('taskDirectories');
         localStorage.setItem('taskDirectories', JSON.stringify(res.data));
     });
     taskManagerApi.getListActivity().then((res) => {
+        localStorage.removeItem('activity');
         localStorage.setItem('activity', JSON.stringify(res.data));
     });
 };
@@ -40,6 +42,9 @@ const tasksSlice = createSlice({
             // const newTasksList = state.activities.filter((act) => act.id !== action.payload);
             // state.activities = newTasksList;
             console.log(action);
+            taskManagerApi.deleteActivity(action.payload).then((res) => {
+                console.log(res);
+            });
         },
         markAsImportant(state, action: PayloadAction<string>) {
             // const newTaskFavorited = state.activities.find((act) => act.id === action.payload);
@@ -122,6 +127,13 @@ export const tasksMiddleware = (store: MiddlewareAPI) => (next: Dispatch) => (ac
         console.log(JSON.parse(localStorage.getItem('activity')!));
         if (localStorage.getItem('activity')) {
             const localStorageTasks = JSON.parse(localStorage.getItem('activity')!);
+            const taskIndex = localStorageTasks.findIndex(
+                (task: Activity) => task.id === action.payload
+            );
+
+            localStorageTasks.splice(taskIndex, 1);
+            localStorage.setItem('activity', JSON.stringify(localStorageTasks));
+
             if (localStorageTasks.length === 0) {
                 localStorage.removeItem('activity');
             }

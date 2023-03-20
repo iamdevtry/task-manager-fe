@@ -31,5 +31,12 @@ const devtryBlogApi = {
         };
         return axiosClient.post(url, params, config);
     },
+    deleteActivity: async (id: Number) => {
+        const url = `/activities/${id}`;
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.delete(url, config);
+    },
 };
 export default devtryBlogApi;
