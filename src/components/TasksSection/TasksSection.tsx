@@ -10,6 +10,7 @@ import TodaysTasks from '../Routes/TodaysTasks';
 import HeaderTasks from './HeaderTasks';
 
 import ListTaskDirectories from '../Routes/ListTaskDirectories';
+import DetailActivity from '../Routes/DetailActivity';
 
 const TasksSection: React.FC = () => {
     return (
@@ -31,6 +32,7 @@ const TasksSection: React.FC = () => {
                 <Route path="/results" element={<SearchResults />} />
                 <Route path="/dir/:dir" element={<Directory />} />
                 <Route path="/task/:taskId" element={<TaskOnly />} />
+                <Route path="/activity/:activityId" element={<DetailActivity />} />
                 <Route path="*" element={<Navigate to="" />} />
             </Routes>
         </main>
