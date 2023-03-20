@@ -32,6 +32,9 @@ const tasksSlice = createSlice({
         addNewTask(state, action: PayloadAction<ActivityCreate>) {
             // state.tasks = [action.payload, ...state.tasks];
             console.log(action.payload);
+            taskManagerApi.addActivity(action.payload).then((res) => {
+                console.log(res);
+            });
         },
         removeTask(state, action) {
             // const newTasksList = state.activities.filter((act) => act.id !== action.payload);

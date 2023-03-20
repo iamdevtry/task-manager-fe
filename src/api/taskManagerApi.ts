@@ -24,5 +24,12 @@ const devtryBlogApi = {
         };
         return axiosClient.get(url, config);
     },
+    addActivity: async (params: any) => {
+        const url = '/activities';
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.post(url, params, config);
+    },
 };
 export default devtryBlogApi;
