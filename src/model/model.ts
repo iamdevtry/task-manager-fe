@@ -23,6 +23,7 @@ export interface Activity {
     actual_start_date: string | null;
     actual_end_date: string | null;
     content: string | null;
+    comments: Comment[];
 }
 
 export interface TaskDirectory {
@@ -36,6 +37,7 @@ export interface TaskDirectory {
     hours: number;
     status: number;
     tag: Tag;
+    comments: Comment[];
 }
 
 export interface Tag {
@@ -44,7 +46,15 @@ export interface Tag {
     slug: string;
 }
 
-// export interface Comment {
-//     id: number;
+export interface Comment {
+    id: number;
+    activity_id: number | null;
+    task_id: number | null;
+    content: string;
+}
 
-// }
+export interface CommentCreate {
+    activity_id: number | null;
+    task_id: number | null;
+    content: string;
+}

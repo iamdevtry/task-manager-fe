@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Activity } from '../../../model/model';
+import { Activity, CommentCreate } from '../../../model/model';
 import { ReactComponent as Calendar } from '../../../assets/date.svg';
 import { useCustomDate } from '../../hooks/useDate';
 import ModalComment from '../../Utilities/ModalComment';
@@ -11,12 +11,11 @@ const InfosTask: React.FC<{ activity: Activity; isListInView1: boolean }> = ({
     const endDateFormated = useCustomDate('dd/mm/yyyy hh:mm:ss', activity?.planned_end_date!);
 
     const [modalDirIsShown, setModalDirIsShown] = useState<boolean>(false);
-
     const closeModalCommentHandler = () => {
         setModalDirIsShown(false);
     };
 
-    const createNewCommentHandler = (inputValue: string) => {
+    const createNewCommentHandler = (inputValue: CommentCreate) => {
         console.log(inputValue);
         console.log('add comment');
     };
@@ -27,6 +26,7 @@ const InfosTask: React.FC<{ activity: Activity; isListInView1: boolean }> = ({
                 <ModalComment
                     onClose={closeModalCommentHandler}
                     onConfirm={createNewCommentHandler}
+                    activitiId={activity.id}
                     btnText="Create"
                     title="Add comment"
                 />
@@ -67,6 +67,16 @@ const InfosTask: React.FC<{ activity: Activity; isListInView1: boolean }> = ({
                         <Calendar className="mr-2 w-4 sm:w-5" /> {endDateFormated}
                     </label>
                 </time>
+                <label>
+                    Comments
+                    <blockquote className="text-sm italic text-gray-600 dark:text-white">
+                        <p className="truncate ...">
+                            "Flowbite is just awesome. It contains tons of predesigned components
+                            and pages starting from login screen to complex dashboard. Perfect
+                            choice for your next SaaS application."
+                        </p>
+                    </blockquote>
+                </label>
                 <div>
                     <i
                         className="text-sky-400  hover:underline"

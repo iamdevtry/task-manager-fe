@@ -25,6 +25,9 @@ const ListTaskDirectories = () => {
     };
     return (
         <div className="pt-5 pb-5">
+            <h1 className="font-medium my-5 text-center sm:text-left sm:my-8 md:text-2xl text-lg dark:text-slate-200">
+                All tasks
+            </h1>
             {modalDirIsShown && (
                 <ModalDirectory
                     onClose={closeModalDirectoryHandler}
@@ -33,6 +36,7 @@ const ListTaskDirectories = () => {
                     title="Create new directory"
                 />
             )}
+
             <ul className="flex flex-wrap">
                 {directories.map((dir) => (
                     <ItemDirectoryDetail key={dir.id} dir={dir} />
