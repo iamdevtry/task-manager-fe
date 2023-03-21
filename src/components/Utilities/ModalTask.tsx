@@ -130,7 +130,7 @@ const ModalCreateTask: React.FC<{
         if (activity) {
             return activity.task_id.toString();
         }
-        return directories[0].id.toString();
+        return directories[0]?.id.toString();
     });
 
     const createNewActivityHandler = (event: React.FormEvent): void => {

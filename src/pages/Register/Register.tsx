@@ -6,12 +6,13 @@ import AuthService from '../../services/auth/authServices';
 import { phone } from 'phone';
 import countryCodes from 'country-codes-list';
 
+import { UserCreate } from '../../model/model';
+
 const countryCodesObject = countryCodes.customArray();
 
 const RegisterPage = () => {
     // Use useHistory hook to get access to history object
     const navigate = useNavigate();
-
     // Use useState hook to manage username and password inputs
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -26,13 +27,16 @@ const RegisterPage = () => {
     const [error, setError] = useState(null);
     const [phoneInvalid, setPhoneInvalid] = useState('');
     // Get the login method from AuthService
-    const login = async (values: any) => {
+    const register = async (values: any) => {
         await taskManagerApi
-            .login(values)
+            .register(values)
             .then((res) => {
-                console.log('login success');
-                AuthService.setUser(res);
-                navigate('/');
+                console.log('signup success');
+
+                // Navigate to the home page after 2s
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
             })
             .catch((err) => {
                 setError(err.response.data.message);
@@ -45,7 +49,17 @@ const RegisterPage = () => {
 
         if (!phoneInvalid) {
             // login({ username, password });
-            console.log('sign up');
+            const user: UserCreate = {
+                username: username,
+                password: password,
+                first_name: firstname,
+                middle_name: middlename,
+                last_name: lastname,
+                mobile: mobile,
+                email: email,
+            };
+            console.log(user);
+            register(user);
         }
     };
 

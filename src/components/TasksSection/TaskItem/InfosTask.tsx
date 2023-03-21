@@ -77,14 +77,14 @@ const InfosTask: React.FC<{ activity: Activity; isListInView1: boolean }> = ({
                         </p>
                     </blockquote>
                 </label>
-                <div>
+                {/* <div>
                     <i
                         className="text-sky-400  hover:underline"
                         onClick={() => setModalDirIsShown(true)}
                     >
                         Add comment
                     </i>
-                </div>
+                </div> */}
             </div>
         </>
     );

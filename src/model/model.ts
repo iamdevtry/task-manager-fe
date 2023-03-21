@@ -59,3 +59,13 @@ export interface CommentCreate {
     task_id: number | null;
     content: string;
 }
+
+export interface UserCreate {
+    first_name: string;
+    middle_name: string;
+    last_name: string;
+    username: string;
+    email: string;
+    password: string;
+    mobile: string;
+}
