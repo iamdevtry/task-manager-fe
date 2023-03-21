@@ -20,13 +20,17 @@ const TaskItem: React.FC<{ isListInView1: boolean; activity: Activity }> = ({
                 >
                     {activity.title}
                 </Link> */}
+
                 <article
                     className={`bg-slate-100 rounded-lg p-3 sm:p-4 flex text-left transition hover:shadow-lg hover:shadow-slate-300 dark:bg-slate-800 dark:hover:shadow-transparent ${
                         isListInView1 ? 'flex-row sm:h-32' : 'flex-col h-52 sm:h-64'
                     }`}
                     style={{ height: '100%' }}
                 >
-                    <InfosTask activity={activity} isListInView1={isListInView1} />
+                    <Link to={`/activity/${activity.id}`}>
+                        <InfosTask activity={activity} isListInView1={isListInView1} />
+                    </Link>
+
                     <ActionsTaskItem activity={activity} isListInView1={isListInView1} />
                 </article>
             </li>

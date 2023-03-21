@@ -38,5 +38,33 @@ const devtryBlogApi = {
         };
         return axiosClient.delete(url, config);
     },
+    getActivity: async (id: Number) => {
+        const url = `/activities/${id}`;
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.get(url, config);
+    },
+    getListCommentsByActivityId: async (id: Number) => {
+        const url = `/comments/${id}`;
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.get(url, config);
+    },
+    addComment: async (params: any) => {
+        const url = '/comments';
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.post(url, params, config);
+    },
+    deleteComment: async (id: Number) => {
+        const url = `/comments/${id}`;
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.delete(url, config);
+    },
 };
 export default devtryBlogApi;

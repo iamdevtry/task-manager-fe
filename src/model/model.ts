@@ -47,9 +47,10 @@ export interface Tag {
 }
 
 export interface Comment {
-    id: number;
-    activity_id: number | null;
-    task_id: number | null;
+    id?: number;
+    title?: string | null;
+    activity_id?: number | null;
+    task_id?: number | null;
     content: string;
 }
 
