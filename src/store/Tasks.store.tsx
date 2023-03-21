@@ -59,9 +59,26 @@ const tasksSlice = createSlice({
         },
         toggleTaskCompleted(state, action: PayloadAction<string>) {
             const taskId = action.payload;
-            const currTask = state.activities.find((act) => act.id + '' === taskId)!;
-            console.log(state.activities);
-            console.log(currTask);
+            console.log(taskId);
+
+            //update status of activity in local storage
+            const newTaskCompleted: Activity = state.activities.find(
+                (act) => act.id === parseInt(taskId)
+            )!;
+            const indexTask = state.activities.indexOf(newTaskCompleted);
+            if (state.activities[indexTask].status === 1) {
+                taskManagerApi.updateStatusActivity({
+                    id: state.activities[indexTask].id,
+                    status: 0,
+                });
+                state.activities[indexTask].status = 0;
+            } else {
+                taskManagerApi.updateStatusActivity({
+                    id: state.activities[indexTask].id,
+                    status: 1,
+                });
+                state.activities[indexTask].status = 1;
+            }
         },
         deleteAllData(state) {
             state.activities = [];
