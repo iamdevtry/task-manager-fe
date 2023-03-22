@@ -49,6 +49,13 @@ const devtryBlogApi = {
         };
         return axiosClient.get(url, config);
     },
+    updateActivity: async (params: any) => {
+        const url = `/activities/${params.id}`;
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.put(url, params, config);
+    },
     updateStatusActivity: async (params: any) => {
         const url = `/activities`;
         const config = {

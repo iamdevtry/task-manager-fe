@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { menusActions } from '../../store/Menu.store';
 import LayoutMenus from '../Utilities/LayoutMenus';
 import DarkMode from './DarkMode';
-import DeleteTasks from './DeleteTasks';
 import TasksDone from './TasksDone';
 
 import { User } from '../../interfaces';
@@ -14,6 +13,7 @@ import authService from '../../services/auth/authServices';
 import jwt_decode from 'jwt-decode';
 import { TokenDecoded } from '../../interfaces';
 
+import AuthService from '../../services/auth/authServices';
 const AccountData: React.FC = () => {
     const navigate = useNavigate();
 
@@ -55,6 +55,11 @@ const AccountData: React.FC = () => {
         }
     }, [token]);
 
+    const handleLogout = () => {
+        AuthService.removeUser();
+        navigate('/login');
+    };
+
     return (
         <LayoutMenus
             menuOpen={menuOpen}
@@ -68,9 +73,12 @@ const AccountData: React.FC = () => {
                     </span>
                     <img src={avatar1} alt="cat" className="w-10 rounded-full ml-4" />
                 </span>
-
                 <DarkMode />
-
+                <span className="flex items-center">
+                    <button onClick={handleLogout} className="text-cyan-600 hover:underline">
+                        Logout
+                    </button>
+                </span>
                 <TasksDone />
                 {/* <DeleteTasks /> */}
                 <a

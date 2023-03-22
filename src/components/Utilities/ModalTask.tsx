@@ -120,24 +120,24 @@ const ModalCreateTask: React.FC<{
     });
 
     const [isCompleted, setIsCompleted] = useState<boolean>(() => {
-        // if (activty) {
-        //     return activty.completed;
-        // }
+        if (activity) {
+            return activity.status === 1 ? true : false;
+        }
         return false;
     });
 
-    const [selectedDirectory, setSelectedDirectory] = useState<string>(() => {
+    const [selectedDirectory, setSelectedDirectory] = useState<number>(() => {
         if (activity) {
-            return activity.task_id.toString();
+            return activity.task_id;
         }
-        return directories[0]?.id.toString();
+        return directories[0]?.id;
     });
 
     const createNewActivityHandler = (event: React.FormEvent): void => {
         event.preventDefault();
 
         const newActivity: ActivityCreate = {
-            task_id: 1,
+            task_id: selectedDirectory,
             title: title,
             description: description,
             content: content,
@@ -241,7 +241,7 @@ const ModalCreateTask: React.FC<{
                     <select
                         className="block w-full"
                         value={selectedDirectory}
-                        onChange={({ target }) => setSelectedDirectory(target.value)}
+                        onChange={({ target }) => setSelectedDirectory(parseInt(target.value))}
                     >
                         {directories.map((dir: TaskDirectory) => (
                             <option

@@ -1,4 +1,5 @@
 export interface ActivityCreate {
+    id?: number;
     task_id: number;
     title: string;
     description: string;

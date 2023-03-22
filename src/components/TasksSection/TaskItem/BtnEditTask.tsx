@@ -6,6 +6,7 @@ import { ReactComponent as OptionsSvg } from '../../../assets/options.svg';
 import { Activity, ActivityCreate } from '../../../model/model';
 
 const BtnEditTask: React.FC<{ activity: Activity }> = ({ activity }) => {
+    const currentActivityId = activity?.id;
     const [modalEditTaskOpen, setModalEditTaskOpen] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
@@ -18,6 +19,9 @@ const BtnEditTask: React.FC<{ activity: Activity }> = ({ activity }) => {
     };
 
     const editTaskHandler = (activity: Activity | ActivityCreate) => {
+        if (currentActivityId) {
+            activity.id = currentActivityId;
+        }
         dispatch(tasksActions.editTask(activity));
     };
 

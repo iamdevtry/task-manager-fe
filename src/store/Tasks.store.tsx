@@ -32,7 +32,6 @@ const tasksSlice = createSlice({
     initialState: initialState,
     reducers: {
         addNewTask(state, action: PayloadAction<ActivityCreate>) {
-            // state.tasks = [action.payload, ...state.tasks];
             console.log(action.payload);
             taskManagerApi.addActivity(action.payload).then((res) => {
                 console.log(res);
@@ -45,17 +44,33 @@ const tasksSlice = createSlice({
             taskManagerApi.deleteActivity(action.payload).then((res) => {
                 console.log(res);
             });
+
+            const newTasksList = state.activities.filter((act) => act.id !== action.payload);
+            state.activities = newTasksList;
         },
         markAsImportant(state, action: PayloadAction<string>) {
             // const newTaskFavorited = state.activities.find((act) => act.id === action.payload);
             // newTaskFavorited!.important = !newTaskFavorited!.important;
         },
         editTask(state, action: PayloadAction<ActivityCreate | Activity>) {
-            // const taskId = action.payload.id;
-            // const newTaskEdited: Task = state.tasks.find((task: Task) => task.id === taskId)!;
-            // const indexTask = state.tasks.indexOf(newTaskEdited);
-            // state.tasks[indexTask] = action.payload;
             console.log(action.payload);
+
+            //find activity in local storage
+            const newTaskEdited: Activity = state.activities.find(
+                (act) => act.id === action.payload.id
+            )!;
+            const indexTask = state.activities.indexOf(newTaskEdited);
+
+            taskManagerApi.updateActivity(action.payload).then((res) => {
+                console.log(res);
+            });
+            state.activities[indexTask].title = action.payload.title;
+            state.activities[indexTask].task_id = action.payload.task_id;
+            state.activities[indexTask].description = action.payload.description;
+            state.activities[indexTask].content = action.payload.content;
+            state.activities[indexTask].planned_start_date = action.payload.planned_start_date;
+            state.activities[indexTask].planned_end_date = action.payload.planned_end_date;
+            state.activities[indexTask].status = action.payload.status;
         },
         toggleTaskCompleted(state, action: PayloadAction<string>) {
             const taskId = action.payload;
