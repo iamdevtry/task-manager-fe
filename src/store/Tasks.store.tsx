@@ -106,15 +106,29 @@ const tasksSlice = createSlice({
             state.directories = [];
         },
         createDirectory(state, action: PayloadAction<string>) {
-            const newDirectory: string = action.payload;
-            // const directoryAlreadyExists = state.directories.includes(newDirectory);
-            // if (directoryAlreadyExists) return;
-            // state.directories = [newDirectory, ...state.directories];
+            const newDirectory: TaskDirectory = {
+                id: state.directories.length + 1,
+                title: action.payload,
+            };
+            taskManagerApi.addTask(newDirectory).then((res) => {
+                taskManagerApi.getListTask().then((res) => {
+                    localStorage.removeItem('taskDirectories');
+                    localStorage.setItem('taskDirectories', JSON.stringify(res.data));
+                    window.location.reload();
+                });
+            });
         },
         deleteDirectory(state, action: PayloadAction<string>) {
             // const dirName = action.payload;
             // state.directories = state.directories.filter((dir) => dir !== dirName);
             // state.tasks = state.tasks.filter((task) => task.dir !== dirName);
+            taskManagerApi.deleteTask(action.payload).then((res) => {
+                taskManagerApi.getListTask().then((res) => {
+                    localStorage.removeItem('taskDirectories');
+                    localStorage.setItem('taskDirectories', JSON.stringify(res.data));
+                    window.location.reload();
+                });
+            });
         },
         editDirectoryName(
             state,

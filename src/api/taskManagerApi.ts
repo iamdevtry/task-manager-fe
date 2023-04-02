@@ -14,13 +14,6 @@ const devtryBlogApi = {
         const url = `/users/${id}`;
         return axiosClient.get(url);
     },
-    getListTask: async () => {
-        const url = '/tasks';
-        const config = {
-            headers: authHeader(),
-        };
-        return axiosClient.get(url, config);
-    },
     getListActivity: async () => {
         const url = '/activities';
         const config = {
@@ -79,6 +72,28 @@ const devtryBlogApi = {
     },
     deleteComment: async (id: Number) => {
         const url = `/comments/${id}`;
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.delete(url, config);
+    },
+    getListTask: async () => {
+        const url = '/tasks';
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.get(url, config);
+    },
+    addTask: async (params: any) => {
+        console.log(params);
+        const url = '/tasks';
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.post(url, params, config);
+    },
+    deleteTask: async (id: any) => {
+        const url = `/tasks/${id}`;
         const config = {
             headers: authHeader(),
         };

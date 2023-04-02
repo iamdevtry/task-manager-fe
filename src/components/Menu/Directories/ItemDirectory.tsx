@@ -26,7 +26,7 @@ const ItemDirectory: React.FC<{ dir: TaskDirectory; classActive: string }> = ({
     };
 
     const deleteDirectoryHandler = () => {
-        dispatch(tasksActions.deleteDirectory(dir.title));
+        dispatch(tasksActions.deleteDirectory(dir.id?.toString()!));
     };
 
     const confirmEditDirNameHandler = (dirName: string) => {

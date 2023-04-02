@@ -28,17 +28,17 @@ export interface Activity {
 }
 
 export interface TaskDirectory {
-    id: number;
+    id?: number;
     title: string;
-    description: string;
-    content: string;
-    created_at: string;
-    planned_start_date: string;
-    planned_end_date: string;
-    hours: number;
-    status: number;
-    tag: Tag;
-    comments: Comment[];
+    description?: string;
+    content?: string;
+    created_at?: string;
+    planned_start_date?: string;
+    planned_end_date?: string;
+    hours?: number;
+    status?: number;
+    tag?: Tag;
+    comments?: Comment[];
 }
 
 export interface Tag {
