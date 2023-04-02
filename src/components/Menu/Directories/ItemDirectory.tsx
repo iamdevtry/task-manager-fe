@@ -30,12 +30,12 @@ const ItemDirectory: React.FC<{ dir: TaskDirectory; classActive: string }> = ({
     };
 
     const confirmEditDirNameHandler = (dirName: string) => {
-        // dispatch(
-        //     tasksActions.editDirectoryName({
-        //         previousDirName: dir,
-        //         newDirName: dirName,
-        //     })
-        // );
+        dispatch(
+            tasksActions.editDirectoryName({
+                id: dir.id?.toString()!,
+                title: dirName,
+            })
+        );
     };
 
     return (

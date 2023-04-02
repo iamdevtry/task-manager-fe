@@ -130,22 +130,13 @@ const tasksSlice = createSlice({
                 });
             });
         },
-        editDirectoryName(
-            state,
-            action: PayloadAction<{ newDirName: string; previousDirName: string }>
-        ) {
-            const newDirName: string = action.payload.newDirName;
-            const previousDirName: string = action.payload.previousDirName;
-            // const directoryAlreadyExists = state.directories.includes(newDirName);
-            // if (directoryAlreadyExists) return;
-
-            // const dirIndex = state.directories.indexOf(previousDirName);
-
-            // state.directories[dirIndex] = newDirName;
-            state.activities.forEach((act) => {
-                if (act.title === previousDirName) {
-                    act.title = newDirName;
-                }
+        editDirectoryName(state, action: PayloadAction<{ id: string; title: string }>) {
+            taskManagerApi.updateTask(action.payload).then((res) => {
+                taskManagerApi.getListTask().then((res) => {
+                    localStorage.removeItem('taskDirectories');
+                    localStorage.setItem('taskDirectories', JSON.stringify(res.data));
+                    window.location.reload();
+                });
             });
         },
     },

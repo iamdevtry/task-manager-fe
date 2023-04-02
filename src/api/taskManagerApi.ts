@@ -99,5 +99,13 @@ const devtryBlogApi = {
         };
         return axiosClient.delete(url, config);
     },
+    updateTask: async (params: any) => {
+        console.log(params);
+        const url = `/tasks/${params.id}`;
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.put(url, params, config);
+    },
 };
 export default devtryBlogApi;
