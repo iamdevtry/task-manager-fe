@@ -47,13 +47,12 @@ const tasksSlice = createSlice({
             console.log(action);
             taskManagerApi.deleteActivity(action.payload).then((res) => {
                 console.log(res);
+                const newTasksList = state.activities.filter((act) => act.id !== action.payload);
+                state.activities = newTasksList;
+                localStorage.removeItem('activity');
+                localStorage.setItem('activity', JSON.stringify(newTasksList));
+                window.location.reload();
             });
-
-            const newTasksList = state.activities.filter((act) => act.id !== action.payload);
-            state.activities = newTasksList;
-            localStorage.removeItem('activity');
-            localStorage.setItem('activity', JSON.stringify(newTasksList));
-            window.location.reload();
         },
         markAsImportant(state, action: PayloadAction<string>) {
             // const newTaskFavorited = state.activities.find((act) => act.id === action.payload);

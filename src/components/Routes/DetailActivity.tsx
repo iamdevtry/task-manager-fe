@@ -3,36 +3,9 @@ import { Activity, Comment } from '../../model/model';
 import { useParams } from 'react-router-dom';
 import taskManagerApi from '../../api/taskManagerApi';
 
-const activityDemo: Activity = {
-    id: 1,
-    title: 'Activity 1',
-    description: 'Description 1',
-    status: 0,
-    content: 'Content 1',
-    created_at: new Date() + '',
-    updated_at: new Date() + '',
-    planned_end_date: new Date() + '',
-    actual_end_date: new Date() + '',
-    planned_start_date: new Date() + '',
-    actual_start_date: new Date() + '',
-    task_id: 1,
-    hours: 1,
-    comments: [
-        {
-            id: 1,
-            content: 'Comment 1',
-            activity_id: 1,
-            task_id: 1,
-        },
-        {
-            id: 2,
-            content: 'Comment 2',
-            activity_id: 1,
-            task_id: 1,
-        },
-    ],
-};
-
+import { useCustomDate } from '../hooks/useDate';
+import BtnEditTask from '../TasksSection/TaskItem/BtnEditTask';
+import BtnDeleteTask from '../TasksSection/TaskItem/BtnDeleteTask';
 const DetailActivity: React.FC = () => {
     let { activityId } = useParams();
 
@@ -57,6 +30,10 @@ const DetailActivity: React.FC = () => {
             getCommentsByActivityId();
         }
     }, [activityId]);
+
+    const startDateFormated = useCustomDate('dd/mm/yyyy hh:mm:ss', activity?.planned_start_date!);
+    const endDateFormated = useCustomDate('dd/mm/yyyy hh:mm:ss', activity?.planned_end_date!);
+    const createDateFormated = useCustomDate('dd/mm/yyyy hh:mm:ss', activity?.created_at!);
 
     const addComment = () => {
         const newComment: Comment = {
@@ -98,7 +75,13 @@ const DetailActivity: React.FC = () => {
                 <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
                     <div className="w-full flex flex-col ">
                         <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
-                            <h4 className="text-xl text-gray-900 font-bold">Detail activity</h4>
+                            <h4 className="text-xl text-gray-900 font-bold flex justify-between">
+                                Detail activity
+                                <span className="flex">
+                                    <BtnEditTask activity={activity!} />
+                                    <BtnDeleteTask taskId={activity?.id + ''} />
+                                </span>
+                            </h4>
                             <ul className="mt-2 text-gray-700">
                                 <li className="flex border-y py-2">
                                     <span className="font-bold w-[25%] mr-5">Title:</span>
@@ -114,7 +97,7 @@ const DetailActivity: React.FC = () => {
                                 </li>
                                 <li className="flex border-b py-2">
                                     <span className="font-bold w-[25%] mr-5">Created At:</span>
-                                    <span className="text-gray-700">{activity?.created_at}</span>
+                                    <span className="text-gray-700">{createDateFormated}</span>
                                 </li>
                                 <li className="flex border-b py-2">
                                     <span className="font-bold w-[25%] mr-5">Updated At:</span>
@@ -124,17 +107,13 @@ const DetailActivity: React.FC = () => {
                                     <span className="font-bold w-[25%] mr-5">
                                         Planned Started Date:
                                     </span>
-                                    <span className="text-gray-700">
-                                        {activity?.planned_start_date}
-                                    </span>
+                                    <span className="text-gray-700">{startDateFormated}</span>
                                 </li>
                                 <li className="flex border-b py-2">
                                     <span className="font-bold w-[25%] mr-5">
                                         Planned End Date:
                                     </span>
-                                    <span className="text-gray-700">
-                                        {activity?.planned_end_date}
-                                    </span>
+                                    <span className="text-gray-700">{endDateFormated}</span>
                                 </li>
                                 <li className="flex border-b py-2">
                                     <span className="font-bold w-[25%] mr-5">
