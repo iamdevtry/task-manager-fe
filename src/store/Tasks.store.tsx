@@ -34,7 +34,11 @@ const tasksSlice = createSlice({
         addNewTask(state, action: PayloadAction<ActivityCreate>) {
             console.log(action.payload);
             taskManagerApi.addActivity(action.payload).then((res) => {
-                console.log(res);
+                taskManagerApi.getListActivity().then((res) => {
+                    localStorage.removeItem('activity');
+                    localStorage.setItem('activity', JSON.stringify(res.data));
+                    window.location.reload();
+                });
             });
         },
         removeTask(state, action) {
@@ -47,6 +51,9 @@ const tasksSlice = createSlice({
 
             const newTasksList = state.activities.filter((act) => act.id !== action.payload);
             state.activities = newTasksList;
+            localStorage.removeItem('activity');
+            localStorage.setItem('activity', JSON.stringify(newTasksList));
+            window.location.reload();
         },
         markAsImportant(state, action: PayloadAction<string>) {
             // const newTaskFavorited = state.activities.find((act) => act.id === action.payload);
