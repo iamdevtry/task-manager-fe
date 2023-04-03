@@ -130,7 +130,7 @@ const ModalCreateTask: React.FC<{
         if (activity) {
             return activity.task_id;
         }
-        return directories[0]?.id;
+        return directories[0]?.id!;
     });
 
     const createNewActivityHandler = (event: React.FormEvent): void => {
@@ -254,11 +254,11 @@ const ModalCreateTask: React.FC<{
                         ))}
                     </select>
                 </label>
-                <InputCheckbox
+                {/* <InputCheckbox
                     isChecked={isImportant}
                     setChecked={setIsImportant}
                     label="Mark as important"
-                />
+                /> */}
                 <InputCheckbox
                     isChecked={isCompleted}
                     setChecked={setIsCompleted}

@@ -20,6 +20,11 @@ const AccountData: React.FC = () => {
     const [token, setToken] = React.useState<any>();
     const [infoUser, setInfoUser] = React.useState<User>();
 
+    const [numsTask, setNumsTask] = React.useState<number>(0);
+    const [numsTaskDone, setNumsTaskDone] = React.useState<number>(0);
+    const [numsActivity, setNumsActivity] = React.useState<number>(0);
+    const [numsActivityDone, setNumsActivityDone] = React.useState<number>(0);
+
     const menuOpen = useAppSelector((state) => state.menu.menuAccountOpened);
 
     const dispatch = useAppDispatch();
@@ -48,10 +53,39 @@ const AccountData: React.FC = () => {
                     console.log(err.response.data);
                 });
         };
+
+        const getNumsTask = async () => {
+            await taskManagerApi.countTask().then((res) => {
+                setNumsTask(res.data);
+            });
+        };
+
+        const getNumsTaskDone = async () => {
+            await taskManagerApi.countTaskDone().then((res) => {
+                setNumsTaskDone(res.data);
+            });
+        };
+
+        const getNumsActivity = async () => {
+            await taskManagerApi.countActivity().then((res) => {
+                setNumsActivity(res.data);
+            });
+        };
+
+        const getNumsActivityDone = async () => {
+            await taskManagerApi.countActivityDone().then((res) => {
+                setNumsActivityDone(res.data);
+            });
+        };
+
         if (token) {
             let decoded: TokenDecoded;
             decoded = jwt_decode(JSON.parse(token).token);
             getUser(decoded.payload.user_id);
+            getNumsTask();
+            getNumsTaskDone();
+            getNumsActivity();
+            getNumsActivityDone();
         }
     }, [token]);
 
@@ -81,6 +115,19 @@ const AccountData: React.FC = () => {
                 </span>
                 <TasksDone />
                 {/* <DeleteTasks /> */}
+                <div className="flex flex-col mt-5">
+                    <span className="font-medium">
+                        <span>Stats</span>
+                    </span>
+                    <span className="text-sm text-gray-400">Tasks</span>
+                    <span className="text-lg font-medium">
+                        {numsTaskDone}/{numsTask}
+                    </span>
+                    <span className="text-sm text-gray-400">Activities</span>
+                    <span className="text-lg font-medium">
+                        {numsActivityDone}/{numsActivity}
+                    </span>
+                </div>
                 <a
                     href="https://github.com/iamdevtry"
                     className="mt-auto bg-rose-100 p-2 rounded-md text-rose-600 text-center transition hover:bg-rose-200 dark:bg-slate-700/[.3] dark:text-slate-200"

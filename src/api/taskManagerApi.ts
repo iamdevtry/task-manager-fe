@@ -107,5 +107,33 @@ const devtryBlogApi = {
         };
         return axiosClient.put(url, params, config);
     },
+    countTask: async () => {
+        const url = '/tasks/count-task';
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.get(url, config);
+    },
+    countTaskDone: async () => {
+        const url = '/tasks/count-task-done';
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.get(url, config);
+    },
+    countActivity: async () => {
+        const url = '/activities/count-activity';
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.get(url, config);
+    },
+    countActivityDone: async () => {
+        const url = '/activities/count-activity-done';
+        const config = {
+            headers: authHeader(),
+        };
+        return axiosClient.get(url, config);
+    },
 };
 export default devtryBlogApi;
