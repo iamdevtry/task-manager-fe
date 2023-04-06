@@ -127,6 +127,15 @@ const AccountData: React.FC = () => {
                     <span className="text-lg font-medium">
                         {numsActivityDone}/{numsActivity}
                     </span>
+                    <span className="text-sm text-gray-400">Nhóm SV thực hiện:</span>
+                    <span className="text-lg font-medium">
+                        <ul>
+                            <li>Nguyễn Thị Nga</li>
+                            <li>Nguyễn Thị Thu Hiền</li>
+                            <li>Trần Bình Phong</li>
+                            <li>Huỳnh Quốc Việt</li>
+                        </ul>
+                    </span>
                 </div>
                 <a
                     href="https://github.com/iamdevtry"
